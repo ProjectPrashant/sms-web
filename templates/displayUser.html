@@ -1,0 +1,136 @@
+<div header></div>
+      <div class="row dash">
+                <div class="col-lg-3 col-md-6" style="display: none;">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-users fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">26</div>
+                                    <div>Students!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user-circle fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">12</div>
+                                    <div>Users!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a ui-sref="displayUser">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" style="display: none;">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">124</div>
+                                    <div>Standerd!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" style="display: none;">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-support fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">13</div>
+                                    <div>Support Tickets!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+<div class="panel panel-body disUser" >
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" ng-model="search.name" placeholder="Name">
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" ng-model="search.role" placeholder="Role">
+                </div>
+                &nbsp;&nbsp;
+
+                <input type="checkbox" ng-model="exactmatch" value="Exact Match"/> Exach Match
+
+
+            </div>
+
+            <table class="table" id="tableId" >
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email ID</th>
+                    <th>Mobile No</th>
+                    <th>Role Name</th>
+                    
+                 
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="user in userList |filter:search:exactmatch">
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.mobile}}</td>
+                    <td>{{user.roleId}}</td>
+<!--
+                  <td style="display:none;">{{user.userId}}</td>
+                    <td><button type="button" class="btn btn-primary" ng-click="deleteRecord(user.userId)"><i class="glyphicon glyphicon-remove"></i></button></td>
+                    <td><button type="button" class="btn btn-info" ng-click="editUser(user.userId)" data-toggle="modal" data-target="#myModal" ><i class="glyphicon glyphicon-pencil"></i></button></td>
+-->
+                    </tr>
+                </tbody>
+                </table>
+</div>

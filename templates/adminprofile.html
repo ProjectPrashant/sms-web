@@ -1,0 +1,79 @@
+<div header></div>
+<div class="container">
+
+    <div class="panel panel-body adminDiv" >
+
+    <form class="form form-horizontal" method="post" enctype="multipart/form-data">
+    <table class="table">
+        <thead>
+        <th>Admin Profile</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td colspan="2"><div class="col-sm-4">
+            <div style="margin-left: 10%;">
+                <img style="width:200px; height:200px; border-radius: 62px; margin-left: 106%;" ng-src="{{admin.imageSrc}}"/>
+                <br><br>
+                 <input  style="margin-left: 106%;" type="file" class="file-loading" ng-file-select="onFileSelect($files)" ng-model="admin.imageSrc"> 
+            </div>
+        </div>
+            </td>
+            </tr>
+            <tr>
+                <td><div class="form-group">
+                    <input type="hidden" mg-model="admin.userId">
+                      <div class="col-sm-4">Name:</div>
+                      <div class="col-sm-8"><input type="text" class="form-control" id="ex3" ng-model="admin.name" name="name"required/></div>
+                      </div>
+                  </td>
+            </tr>
+<!--
+            <tr>
+                 <td><div class="form-group">
+                      <div class="col-sm-4">Address:</div>
+                      <div class="col-sm-8"><textarea cols="5" class="form-control"  ng-model="admin.address" name="address"></textarea></div>
+                      </div>
+                  </td>
+            </tr>
+-->
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <div class="col-sm-4">Mobile No :</div>
+                        <div class="col-sm-8"><input type="text" class="form-control" id="ex3" ng-model="admin.mobile" name="mobile" required/></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <div class="col-sm-4">Email ID:</div>
+                        <div class="col-sm-8"><input type="email" class="form-control" id="ex3" ng-model="admin.email" name="email" required/></div>
+                    </div>
+                </td>
+            </tr>
+<!--
+            <tr>
+                 <td>
+                    <div class="form-group">
+                        <div class="col-sm-4">Role:</div>
+                        <div class="col-sm-8"><input type="email" class="form-control" id="ex3" ng-model="admin.role" name="role"required/></div>
+                    </div>
+                </td>
+            </tr>
+-->
+            <tr>
+                <td colspan="2">
+                    <button type="button" class="btn btn-primary" ng-click="updateAdmin(admin)">Update</button>                
+                </td>
+            </tr>
+        </tbody>
+    </table>
+     </form>
+    </div>
+
+
+    
+</div>
+
+

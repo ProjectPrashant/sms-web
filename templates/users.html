@@ -1,0 +1,175 @@
+<div header></div>
+<div class="container" >
+<div class="panel panel-default userDiv" >
+    <div class="row headDiv">
+                    <button type="button" class="btn btn-primary  " data-toggle="modal" data-target="#myModal">Add User</button>
+                   <button class="btn btn-info " ng-click="exportToExcel('#tableId')">
+                        <span class="glyphicon glyphicon-share"></span> Export to Excel
+                    </button>
+         <button type="button" class="btn btn-info " data-toggle="modal" data-target="#cModal">Upload Excel</button>
+
+               {{roleDis}}    
+                       
+                    
+    </div>
+
+</div>
+    <form name="userform" > 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <table class="table">
+          <tbody>
+              <tr>
+                  <td><div class="form-group">
+                      <div class="col-sm-4">Name:</div>
+                      <input type="hidden" ng-model="user.userId">
+                      <div class="col-sm-8"><input only-letters-input type="text" class="form-control" id="ex3" ng-model="user.name" name="name" required/>
+                      <span ng-show="userform.name.$error.required && userform.name.$touched" style="color: red;">This field is required</span>
+                      <span ng-show="userform.name.$error.onlyLettersInput">Enter only charactors</span>
+                      </div>
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td><div class="form-group">
+                      <div class="col-sm-4">Email ID:</div>
+                      <div class="col-sm-8">
+                          <input type="email" class="form-control" id="ex3" ng-model="user.email" name="useremail"                                              required/>
+                            <span ng-show="userform.useremail.$error.required && userform.useremail.$touched"                                               style="color:red">This field is required</span> 
+                            <span ng-show="userform.useremail.$error.email" style="color: red">Please enter valid                                               email</span>                         
+                      </div>
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td><div class="form-group">
+                      <div class="col-sm-4">Password:</div>
+                      <div class="col-sm-8"><input type="password" name="newpassword" class="form-control" id="ex3"                                ng-minlength="4" ng-maxlength="8" ng-pattern="/^[a-zA-Z0-9]*$/" ng-model="user.password"                              required>
+                          <span ng-show="userform.newpassword.$error.pattern" style="color: red">Password Should                                      Aplhanumeric</span>
+                          <span ng-show="userform.newpassword.$error.required && userform.newpassword.$touched"                                 style="color: red;">This field is required</span>
+                          <span ng-show="userform.newpassword.$error.minlength" style="color:red;">Too Short</span>
+                          <span ng-show="userform.newpassword.$error.maxlength" style="color:red;">Too Long</span>
+                         
+                      
+                      </div>
+                      </div>
+                  </td>
+              </tr>
+              
+               <tr ng-hide="cpass">
+                  <td><div class="form-group">
+                        <div class="col-sm-4">Confirm Password:</div>
+                        <div class="col-sm-8"><input type="password" name="cpassword" class="form-control" id="ex3"  
+                          ng-model="user.cpassword" required></div>
+                        <div style="margin-left:38%" class="form-error" ng-if="user.password != user.cpassword"><span                                                       style="color: red;"> &nbsp; Password did not match</span></div>
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td><div class="form-group">
+                      <div class="col-sm-4">Mobile No:</div>
+                      <div class="col-sm-8"><input type="text" class="form-control" id="ex3" ng-model="user.mobile"                               ng-pattern= "/^[7-9][0-9]{9}$/" name="mobile"  required/>
+                          <span ng-show="userform.mobile.$error.required && userform.mobile.$touched"                                             style="color: red;">This field is required</span>
+                      <span ng-show="userform.mobile.$error.pattern" style="color: red;">Invalid Mobile No</span>
+                      </div>
+                    </td>
+              </tr>
+              <tr>
+              <td><div class="form-group">
+                      <div class="col-sm-4">Role:</div>
+                      <div class="col-sm-8">
+                          <select class="form-control" name="devision" id="devision" ng-model="user.roleName" required>
+                              <option ng-repeat="role in use.userList" value="{{role.id}}"><center>{{role.name}}                                       </center></option>
+                    </select>
+                      </div>
+                      </div>
+                  </td>
+                </tr>
+              </tbody>
+          
+          </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="userform.$invalid" ng-click="postUser(user)" ng-hide="saveData">Save changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateUser(user,user.userId)" ng-hide="updateData">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+    <div class="panel panel-body userAdd" >
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" ng-model="search.name" placeholder="Name">
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" ng-model="search.role" placeholder="Role">
+                </div>
+                &nbsp;&nbsp;
+
+                <input type="checkbox" ng-model="exactmatch" value="Exact Match"/> Exach Match
+
+
+            </div>
+
+            <table class="table" id="tableId" >
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email ID</th>
+                    <th>Mobile No</th>
+                    <th>Role Name</th>
+                    
+                 
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="user in userList |filter:search:exactmatch">
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.mobile}}</td>
+                    <td>{{user.roleId}}</td>
+                  <td style="display:none;">{{user.userId}}</td>
+                    <td><button type="button" class="btn btn-primary" ng-click="deleteRecord(user.userId)"><i class="glyphicon glyphicon-remove"></i></button></td>
+                    <td><button type="button" class="btn btn-info" ng-click="editUser(user.userId)" data-toggle="modal" data-target="#myModal" ><i class="glyphicon glyphicon-pencil"></i></button></td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+</div>
+
+<div class="modal fade" id="cModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"></h4> 
+        </div>
+        <div class="modal-body">
+            <fieldset>
+                        <legend>Upload Excel File</legend>
+                        <input type="file" id="file"  name="excel" accept=".xls,.xlsx" multiple="false" >
+                        <br>
+                    <button type="submit" class="btn btn-primary" ng-click="postExcel()">Upload</button>
+                    
+            </fieldset>
+         
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
